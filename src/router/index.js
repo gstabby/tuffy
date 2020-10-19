@@ -54,24 +54,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Resume.vue')
   },
   {
-    path: '/game',
-    name: 'Game',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Game.vue')
-  },
-  {
     path: '/project',
     name: 'Project',
     component: () => import(/* webpackChunkName: "about" */ '../views/Project.vue')
-  },
-  {
-    path: '/game/reaction',
-    name: 'Reaction',
-    component: () => import(/* webpackChunkName: "about" */ '../views/GameReaction.vue')
-  },
-  {
-    path: '/game/memory',
-    name: 'Memory',
-    component: () => import(/* webpackChunkName: "about" */ '../views/GameMemory.vue')
   },
   {
     path: '/404',
@@ -81,7 +66,9 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes
+  base: '/',
+  routes,
+  mode: 'history'
 })
 
 export default router

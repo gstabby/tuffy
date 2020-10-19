@@ -38,6 +38,15 @@ Router.prototype.push = function push (location) {
   return originalPush.call(this, location).catch(err => err)
 }
 
+router.onError((error) => {
+  const pattern = /Loading chunk (\d)+ failed/g
+  const isChunkLoadFailed = error.message.match(pattern)
+  const targetPath = router.history.pending.fullPath
+  if (isChunkLoadFailed) {
+    router.replace(targetPath)
+  }
+})
+
 new Vue({
   router,
   vuetify,

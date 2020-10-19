@@ -1,7 +1,7 @@
 <template>
   <div class="blog">
     <v-app style="background: #F4F4F4;">
-      <div class="container" v-if="isShow">
+      <div class="container">
         <div class="row">
           <div class="col-lg-12">
             <div class="box timeline_box">
@@ -45,10 +45,10 @@
         </div>
       </div>
     </v-app>
-    <div class="footer" v-if="isShow">
+    <div class="footer">
       <p class="footer_text f-14">
         Copyright © 2020 <span class="footer_link">Tuffy</span>. Powered by SpringBoot<br>
-        <span class="footer_link">粤ICP备17114114号-3</span> | <span class="footer_link">Sitemap</span> | <span class="footer_link">站长统计</span> | 网站已在线423天
+        <!-- <span class="footer_link">粤ICP备17114114号-3</span> | <span class="footer_link">Sitemap</span> | <span class="footer_link">站长统计</span> | 网站已在线423天 -->
       </p>
     </div>
   </div>
@@ -58,64 +58,63 @@
 import {
   mdiTimelineTextOutline
 } from '@mdi/js'
-import api from '../common/js/api'
+// import api from '../common/js/api'
 export default {
   data: () => ({
     svgTime: mdiTimelineTextOutline,
-    isShow: false,
     daliys: [
       {
         color: 'purple',
-        year: '2019-06-13',
+        year: '2020-03-13',
         texts: ['博客主页基本完成', '博客前端主要使用了bootstrap，vuetify组件', '后端使用了springboot', '博客内容由markdown语法书写，由showdown.js转译成html'],
         title: 'Tuffy小站初步完成',
         icon: 'mdi-book-variant'
       },
       {
         color: 'green',
-        year: '2019-08-27',
+        year: '2020-04-10',
         texts: ['新增用户登录，注册系统', '为下一步博客功能扩展打下基石'],
         title: '新增用户系统',
         icon: 'mdi-account-outline'
       },
       {
         color: 'pink',
-        year: '2019-08-30',
+        year: '2019-05-30',
         texts: ['评论实现用户评论与博客的绑定', '评论楼层采取无嵌套回复模式'],
         title: '新增评论系统',
         icon: 'mdi-comment-account-outline'
       },
       {
         color: 'grey',
-        year: '2020-02-01',
+        year: '2020-06-20',
         texts: ['注册以及触及用户敏感信息时需要进行邮箱验证', '新增用户头像', '用户注册时随机生成github头像', '忘记密码流程参考steam账号救援'],
         title: '用户系统新增邮箱验证、头像以及忘记密码功能',
         icon: 'mdi-email-outline'
       },
       {
         color: 'orange',
-        year: '2020-03-22',
+        year: '2020-07-22',
         texts: ['用户系统拥有个人信息主页', '个人信息主页集成信息展示，修改信息，修改密码'],
         title: '新增用户个人相关信息页面',
         icon: 'mdi-update'
       },
       {
         color: 'red',
-        year: '2020-03-27',
+        year: '2020-08-12',
         texts: ['消息盒子集成于个人信息页面', '消息提示通过用户在对组件切换的时候，判断是否有新的未读消息来实现'],
         title: '新增用户消息提示以及消息盒子',
         icon: 'mdi-tooltip-plus-outline'
       },
-      {
-        color: 'blue',
-        year: '2020-05-12',
-        texts: ['黑夜/白天模式切换', '禅模式基于vscode禅模式灵感'],
-        title: '新增网页模式修改',
-        icon: 'mdi-weather-night'
-      },
+      // {
+      //   color: 'blue',
+      //   year: '2020-05-12',
+      //   texts: ['黑夜/白天模式切换', '禅模式基于vscode禅模式灵感'],
+      //   title: '新增网页模式修改',
+      //   icon: 'mdi-weather-night'
+      // },
       {
         color: 'indigo',
-        year: '2020-06-22',
+        year: '2020-08-18',
         texts: ['游戏模块独立于项目', '与博客用户系统相关联'],
         title: '新增游戏模块',
         icon: 'mdi-gamepad-square-outline'
@@ -123,11 +122,6 @@ export default {
     ]
   }),
   mounted () {
-    this.axios.get(api.GETBLOGBYYEAR)
-      .then(res => {
-        this.times = res.data.data
-        this.isShow = true
-      })
   },
   methods: {
     toLookBlog (id) {

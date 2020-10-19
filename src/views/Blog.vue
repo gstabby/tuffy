@@ -23,15 +23,13 @@
               </header>
             </div>
             <div class="content_box">
-              <p class="content_p f-16">欢迎大家评阅我的博客，这里有我对生活的看法，也有对理论的学习，有我对编程的思考，也有对问题的探索，如果您也有想对我说的话，欢迎登陆留言，登陆后还可以参与本站的
-                <a style="color: #ED8A23;font-weight: bold;cursor: pointer;" href="http://192.168.31.97:8080/#/gamestore" target="_blank">小游戏</a>
-                排名活动哦
+              <p class="content_p f-16">欢迎大家评阅我的博客，这里有我对生活的看法，也有对理论的学习，有我对编程的思考，也有对问题的探索，如果您也有想对我说的话，欢迎登陆留言，登陆后还可以参与本站的小游戏排名活动哦
               </p>
             </div>
           </div>
           <div class="box blog_box f-16 media mb-1 mb-sm-2 p-2 p-lg-3" v-for="blog in blogs" :key="blog.id" @click="toLookBlog(blog.id)">
             <div class="blog_imgbox align-self-center mr-2 mr-lg-3 w-25 modal-open">
-              <img :src="'http://192.168.31.250/image/' + blog.path" alt="博客图片" class="blog_img w-100 article-img">
+              <img :src="apiIp + '/image/' + blog.path" alt="博客图片" class="blog_img w-100 article-img">
             </div>
             <div class="blog_contentbox media-body align-self-center">
               <p class="blog_author text-muted mb-2 f-12">By <b>{{ blog.user.username }}</b> at <b>{{ blog.created }}</b></p>
@@ -63,15 +61,15 @@
                 </strong>
               </header>
               <div class="game_space f-14">
-                <div class="game_box game1" @click="toGameReaction">
+                <div class="game_box game1" @click="toGame">
                   <img src="../assets/eye.svg" alt="洞察力" class="game_img">
                   <p class="game_text">洞察力</p>
                 </div>
-                <div class="game_box game2" @click="toGameMemory">
+                <div class="game_box game2" @click="toGame">
                   <img src="../assets/watch.svg" alt="记忆力" class="game_img">
                   <p class="game_text">记忆力</p>
                 </div>
-                <div class="game_box game3" @click="toGameReaction">
+                <div class="game_box game3" @click="toGame">
                   <img src="../assets/lightning.svg" alt="反应力" class="game_img">
                   <p class="game_text">反应力</p>
                 </div>
@@ -135,7 +133,7 @@
     <div class="footer">
       <p class="footer_text f-14">
         Copyright © 2020 <span class="footer_link">Tuffy</span>. Powered by SpringBoot<br>
-        <span class="footer_link">粤ICP备17114114号-3</span> | <span class="footer_link">Sitemap</span> | <span class="footer_link">站长统计</span> | 网站已在线423天
+        <!-- <span class="footer_link">粤ICP备17114114号-3</span> | <span class="footer_link">Sitemap</span> | <span class="footer_link">站长统计</span> | 网站已在线423天 -->
       </p>
     </div>
   </div>
@@ -171,7 +169,8 @@ export default {
     totalAll: '',
     page: 1,
     pages: 1,
-    isComplete: false
+    isComplete: false,
+    apiIp: api.ip
   }),
   mounted () {
     this.axios.get(api.GETTYPE)
@@ -303,15 +302,8 @@ export default {
         })
       }
     },
-    toGameReaction () {
-      this.$router.push({
-        path: '/game/reaction'
-      })
-    },
-    toGameMemory () {
-      this.$router.push({
-        path: '/game/memory'
-      })
+    toGame () {
+      window.location.href = 'http://tuffy.viphk.ngrok.org/game/'
     }
   }
 }

@@ -61,9 +61,6 @@
           <v-tab>
             <v-icon>{{ mdiTag }}</v-icon>
           </v-tab>
-          <v-tab>
-            <v-icon>{{ mdiGame }}</v-icon>
-          </v-tab>
         </v-tabs>
         <v-tabs-items v-model="tab">
           <v-tab-item
@@ -190,13 +187,6 @@
                   </v-toolbar>
                 </template>
                 <template v-slot:[`item.actions`]="{ item }">
-                  <v-icon
-                    small
-                    class="mr-2"
-                    @click="editBlogDialog(item)"
-                  >
-                    mdi-pencil
-                  </v-icon>
                   <v-icon
                     small
                     @click="deleteBlogDialog(item)"
@@ -548,7 +538,7 @@ export default {
       else return 'green'
     },
     getImg (ava) {
-      return 'http://192.168.31.229/avatar/' + ava
+      return api.ip + '/avatar/' + ava
     },
     editBlogDialog (item) { // 提交博客弹窗
       const tempObj = JSON.parse(JSON.stringify(item))

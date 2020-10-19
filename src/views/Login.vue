@@ -397,7 +397,8 @@ export default {
     ],
     verificationCodeRules: [
       v => !!v || 'verificationCode is required'
-    ]
+    ],
+    fromGame: false
   }),
   created () {
     if (this.$route.query.username) {
@@ -405,6 +406,11 @@ export default {
     }
   },
   mounted () {
+    if (this.$route.query) {
+      if (this.$route.query.from === 'game') {
+        this.fromGame = true
+      }
+    }
   },
   computed: {
     progress () {
@@ -445,10 +451,14 @@ export default {
             this.snackbar = true
             this.loading = false
             this.validLogin = true
-            if (res.data.data.id === 1) {
-              this.toManager()
+            if (this.fromGame === true) {
+              window.history.back(-1)
             } else {
-              this.toBlog()
+              if (res.data.data.id === 1) {
+                this.toManager()
+              } else {
+                this.toBlog()
+              }
             }
           }
         })

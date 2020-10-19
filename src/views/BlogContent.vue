@@ -49,7 +49,7 @@
               <!-- <p class="blog_info">————{{ blog.created }}</p> -->
               <div class="blog_markdown" v-html="compileMarkDown(blog.content)"></div>
               <p class="publisher f-15">
-                版权说明：如无特殊说明，本站所有博客均为原创，如需引用请注明出处@tuffy[www.tuffy.com]
+                版权说明：如无特殊说明，本站所有博客均为原创，如需引用请注明出处@tuffy
               </p>
               <hr style="margin-bottom: 30px;">
               <div class="info_box">
@@ -95,7 +95,7 @@
             <div class="comment_box" v-for="(comment, index) in blogComment" :key="comment.id">
               <div class="comment_img">
                 <img
-                  :src="'http://192.168.31.250/avatar/' + comment.owner.avatar"
+                  :src="apiIp + '/avatar/' + comment.owner.avatar"
                   class="comment_avatar"
                   width="40"
                   height="40"
@@ -121,7 +121,7 @@
     <div class="footer">
       <p class="footer_text f-14">
         Copyright © 2020 <span class="footer_link">Tuffy</span>. Powered by SpringBoot<br>
-        <span class="footer_link">粤ICP备17114114号-3</span> | <span class="footer_link">Sitemap</span> | <span class="footer_link">站长统计</span> | 网站已在线423天
+        <!-- <span class="footer_link">粤ICP备17114114号-3</span> | <span class="footer_link">Sitemap</span> | <span class="footer_link">站长统计</span> | 网站已在线423天 -->
       </p>
     </div>
   </div>
@@ -155,7 +155,8 @@ export default {
     tip: '',
     recallShow: false,
     recallContent: '',
-    recallNow: {}
+    recallNow: {},
+    apiIp: api.ip
   }),
   created () {
     this.axios.get(api.GETBLOGBYID, {
@@ -167,9 +168,11 @@ export default {
       this.blog = res.data.data
       this.isComplete = true
       this.getComment()
-      this.axios.post(api.READMSG, this.qs.stringify({
-        blogId: this.$route.query.id
-      }))
+      if (localStorage.getItem('token')) {
+        this.axios.post(api.READMSG, this.qs.stringify({
+          blogId: this.$route.query.id
+        }))
+      }
     })
   },
   mounted () {
@@ -692,4 +695,8 @@ ul {
 .blog_markdown >>> ul {
   list-style-type: circle !important;
 }
+/* .blog_markdown >>> li {
+  margin: .1rem 2rem;
+  list-style-type: square !important;
+} */
 </style>

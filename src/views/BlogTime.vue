@@ -34,7 +34,7 @@
     <div class="footer" v-if="isShow">
       <p class="footer_text f-14">
         Copyright © 2020 <span class="footer_link">Tuffy</span>. Powered by SpringBoot<br>
-        <span class="footer_link">粤ICP备17114114号-3</span> | <span class="footer_link">Sitemap</span> | <span class="footer_link">站长统计</span> | 网站已在线423天
+        <!-- <span class="footer_link">粤ICP备17114114号-3</span> | <span class="footer_link">Sitemap</span> | <span class="footer_link">站长统计</span> | 网站已在线423天 -->
       </p>
     </div>
   </div>

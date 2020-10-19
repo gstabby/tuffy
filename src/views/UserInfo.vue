@@ -46,7 +46,7 @@
               <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="验证码" aria-describedby="button-addon2" v-model="formUser.code" :disabled="codeLock" maxlength="4">
               </div>
-              <button type="submit" class="btn btn-outline-primary" style="float: right;" :disabled="updateLock" @click="updateUser">提交修改信息</button>
+              <button type="button" class="btn btn-outline-primary" style="float: right;" :disabled="updateLock" @click="updateUser">提交修改信息</button>
               <div class="clear-fix"></div>
             </form>
           </div>
@@ -83,7 +83,7 @@
               <div class="input-group mb-3">
                 <input type="password" class="form-control" placeholder="确认密码" aria-describedby="button-addon2" :disabled="updatePwdLock" v-model="surePassword" maxlength="20">
               </div>
-              <button type="submit" class="btn btn-outline-primary" style="float: right;" :disabled="updatePwdLock" @click="updatePassword">修改密码</button>
+              <button type="button" class="btn btn-outline-primary" style="float: right;" :disabled="updatePwdLock" @click="updatePassword">修改密码</button>
               <div class="clear-fix"></div>
             </form>
           </div>
@@ -147,7 +147,7 @@
     <div class="footer" v-if="isShow">
       <p class="footer_text f-14">
         Copyright © 2020 <span class="footer_link">Tuffy</span>. Powered by SpringBoot<br>
-        <span class="footer_link">粤ICP备17114114号-3</span> | <span class="footer_link">Sitemap</span> | <span class="footer_link">站长统计</span> | 网站已在线423天
+        <!-- <span class="footer_link">粤ICP备17114114号-3</span> | <span class="footer_link">Sitemap</span> | <span class="footer_link">站长统计</span> | 网站已在线423天 -->
       </p>
     </div>
   </div>
@@ -282,14 +282,13 @@ export default {
           this.tip = '修改成功，请重新登录'
           this.tipDia = true
           this.updateLock = true
-          localStorage.clear()
           this.$router.push({
             path: '/login',
             query: {
               username: this.formUser.username
             }
           })
-          // location.reload()
+          localStorage.clear()
         } else {
           this.tip = res.data.msg
           this.tipDia = true
@@ -316,13 +315,13 @@ export default {
               this.tipPwd = '修改成功，请重新登录'
               this.tipDiaPwd = true
               this.updatePwdLock = true
-              localStorage.clear()
               this.$router.push({
                 path: '/login',
                 query: {
                   username: this.formUser.username
                 }
               })
+              localStorage.clear()
             } else {
               this.tipPwd = res.data.msg
               this.tipDiaPwd = true

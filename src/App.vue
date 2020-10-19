@@ -53,7 +53,7 @@
             <li class="nav-item">
               <a class="nav-link" @click="toBlogTimeline">TimeLine</a>
             </li>
-            <li class="nav-item dropdown">
+            <!-- <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Mode
               </a>
@@ -64,13 +64,13 @@
                 <a class="dropdown-item disabled" href="#">Dark：极致护眼</a>
                 <a class="dropdown-item disabled" href="#">禅模式：集中一点</a>
               </div>
-            </li>
+            </li> -->
             <li class="nav-item" v-if="!isLogin">
               <a class="nav-link" @click="toLogin">登录 / 注册</a>
             </li>
             <li class="nav-item" v-if="isLogin">
               <img
-                :src="'http://192.168.31.229/avatar/' + avatar"
+                :src="apiIp + '/avatar/' + avatar"
                 class="user_avatar"
                 width="40"
                 height="40"
@@ -96,29 +96,24 @@
 
       <v-navigation-drawer class="nav" v-model="drawer" fixed temporary>
         <v-list-item>
-            <img class="avator" src="./assets/avator.png">
+            <img class="avator" src="./assets/星系.png">
 
           <v-list-item-content>
             <v-list-item-title><span class="title">Tuffy's home</span></v-list-item-title>
           </v-list-item-content>
 
-            <v-icon
+            <!-- <v-icon
               class="menu_drawer"
               @click.stop="menuDrawer = !menuDrawer"
               v-show="!menuDrawer"
-            >{{ svgMenu }}</v-icon>
+            >{{ svgMenu }}</v-icon> -->
 
             <v-icon
               class="menu_close"
               @click.stop="drawer = !drawer"
-              v-show="menuDrawer"
             >{{ svgClose }}</v-icon>
         </v-list-item>
-        <div class="mid_text welcome" v-show="!menuDrawer">
-          <p class="welcome_p">{{ welcomeSay }}
-          </p>
-        </div>
-        <div class="mid_text menu" v-show="menuDrawer">
+        <div class="mid_text menu">
           <div id="part_1">
             <v-list-item-content class="menu_list">
               <v-list-item-title @click="toHome"><span class="title">首页</span></v-list-item-title>
@@ -126,14 +121,14 @@
             <v-divider id="divider_1"></v-divider>
           </div>
           <div id="part_2">
-            <v-list-item-content class="menu_list">
+            <!-- <v-list-item-content class="menu_list">
               <v-list-item-title @click="toProject"><span class="title">项目</span></v-list-item-title>
-            </v-list-item-content>
+            </v-list-item-content> -->
             <v-list-item-content class="menu_list">
               <v-list-item-title @click="toResume"><span class="title">个人简历</span></v-list-item-title>
             </v-list-item-content>
             <v-list-item-content class="menu_list">
-              <v-list-item-title @click="toGame"><span class="title">小游戏（个人制作）</span></v-list-item-title>
+              <v-list-item-title @click="toGame"><span class="title">小游戏</span></v-list-item-title>
             </v-list-item-content>
             <v-divider id="divider_2"></v-divider>
           </div>
@@ -163,7 +158,8 @@ export default {
     isHome: true,
     welcomeSay: '心情惬意，来看篇博客吧☕',
     avatar: localStorage.getItem('avatar'),
-    unReadNum: 0
+    unReadNum: 0,
+    apiIp: api.ip
     // active: true
   }),
   watch: {
@@ -231,10 +227,7 @@ export default {
       this.drawer = null
     },
     toGame () {
-      this.$router.push({
-        path: '/game'
-      })
-      this.drawer = null
+      window.location.href = 'http://tuffy.viphk.ngrok.org/game/'
     },
     toBlog () {
       this.$router.push({
@@ -271,13 +264,15 @@ export default {
       location.reload()
     },
     getUnReadNum () {
-      this.axios.get(api.GETMSG, {
-        params: {
-          isRead: false
-        }
-      }).then(res => {
-        this.unReadNum = res.data.data.length
-      })
+      if (localStorage.getItem('token')) {
+        this.axios.get(api.GETMSG, {
+          params: {
+            isRead: false
+          }
+        }).then(res => {
+          this.unReadNum = res.data.data.length
+        })
+      }
     }
     // reload () {
     //   this.active = false
@@ -287,14 +282,6 @@ export default {
     // }
   },
   created () {
-    const random = parseInt(Math.random() * (3 - 1 + 1) + 1, 10)
-    if (random === 1) {
-      this.welcomeSay = '心情惬意，来看篇博客吧☕'
-    } else if (random === 2) {
-      this.welcomeSay = '心情惬意，来玩个游戏吧☕'
-    } else if (random === 3) {
-      this.welcomeSay = '心情惬意，来阅批简历吧☕'
-    }
     this.getUnReadNum()
     if (localStorage.getItem('token')) {
       this.axios.get(api.ISEXPIRED, {

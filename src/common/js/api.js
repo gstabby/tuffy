@@ -1,4 +1,6 @@
-const ip = 'http://192.168.31.250'
+// const ip = 'http://192.168.31.250:80' // 生产环境
+
+const ip = 'http://175.24.112.117:80' // 运行环境
 
 const ws = ip + '/ws/endpointChat' // websocket连接
 
@@ -67,6 +69,7 @@ const GETUSERBYEMAIL = ip + '/user/getUsernameByEmail' // 获取邮箱下的用�
 const FORGETPASSWORD = ip + '/user/forgetPassword' // 忘记密码
 
 export default {
+  ip: ip,
   LOGIN: LOGIN,
   REGIST: REGIST,
   GETBLOG: GETBLOG,

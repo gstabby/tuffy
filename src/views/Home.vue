@@ -62,7 +62,7 @@ export default {
           buttonColor: 'color: #FD7C2E',
           src: require('../assets/太阳.svg'),
           buttonText: '心情愉悦，来玩个游戏吧',
-          link: '/blog'
+          link: 'game'
         }
       ]
     }
@@ -72,9 +72,13 @@ export default {
       this.currentTopic = ex
     },
     toLink (lk) {
-      this.$router.push({
-        path: lk
-      })
+      if (lk === 'game') {
+        window.location.href = 'http://tuffy.viphk.ngrok.org/game/'
+      } else {
+        this.$router.push({
+          path: lk
+        })
+      }
     }
   }
 }
@@ -230,17 +234,17 @@ button:focus {
   height: 90px;
 }
 .big_img {
-  animation: upordown ease 5s infinite forwards;
+  animation: upordown ease 7s infinite forwards;
 }
 @keyframes upordown {
   0% {
-    transform: translateY(-100px);
+    transform: translateY(-100px) scale(1);
   }
   50% {
-    transform: translateY(0);
+    transform: translateY(0) scale(.95);
   }
   100% {
-    transform: translateY(-100px);
+    transform: translateY(-100px) scale(1);
   }
 }
 @media screen and (max-width: 1900px) {
