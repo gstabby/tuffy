@@ -695,8 +695,8 @@ ul {
 .blog_markdown >>> ul {
   list-style-type: circle !important;
 }
-/* .blog_markdown >>> li {
+.blog_markdown >>> li {
   margin: .1rem 2rem;
-  list-style-type: square !important;
-} */
+  list-style-type: initial !important;
+}
 </style>

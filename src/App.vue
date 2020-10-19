@@ -96,7 +96,7 @@
 
       <v-navigation-drawer class="nav" v-model="drawer" fixed temporary>
         <v-list-item>
-            <img class="avator" src="./assets/星系.png">
+            <img class="avator" src="./assets/星系.svg">
 
           <v-list-item-content>
             <v-list-item-title><span class="title">Tuffy's home</span></v-list-item-title>
